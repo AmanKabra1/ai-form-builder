@@ -74,15 +74,17 @@
 
                     <div class="divide-y">
                         @foreach($fields as $i => $field)
-                            <div class="px-6 py-3 flex items-center gap-4">
-                                <div class="flex-1">
-                                    <span class="font-medium text-sm text-gray-800">{{ $field['label'] }}</span>
-                                    @if(!empty($field['options']))
-                                        <span class="text-xs text-gray-400 ml-2">{{ count($field['options']) }} options</span>
-                                    @endif
+                            <div class="px-6 py-3 flex items-center gap-3 flex-wrap">
+                                <div class="flex-1 min-w-48">
+                                    <div class="flex items-center gap-2 flex-wrap">
+                                        <span class="font-medium text-sm text-gray-800 truncate">{{ $field['label'] }}</span>
+                                        @if(!empty($field['options']))
+                                            <span class="text-xs text-gray-400 whitespace-nowrap">{{ count($field['options']) }} options</span>
+                                        @endif
+                                    </div>
                                 </div>
                                 <select wire:change="updateFieldType({{ $i }}, $event.target.value)"
-                                        class="border border-gray-200 rounded-lg px-2 py-1 text-sm">
+                                        class="border border-gray-200 rounded-lg px-2 py-1 text-sm shrink-0">
                                     @foreach(['text','textarea','number','email','phone','date','dropdown','radio','checkbox','file','heading','rating'] as $t)
                                         <option value="{{ $t }}" {{ $field['type'] === $t ? 'selected' : '' }}>{{ $t }}</option>
                                     @endforeach

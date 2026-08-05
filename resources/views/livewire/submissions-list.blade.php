@@ -18,15 +18,15 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
             {{-- Search bar --}}
-            <div class="mb-4 flex gap-3 items-center">
+            <div class="mb-4 flex gap-3 items-center flex-wrap">
                 <input type="text" wire:model.live.debounce.300ms="search" placeholder="Search responses..."
-                       class="flex-1 border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-indigo-200" />
-                <select wire:model.live="perPage" class="border border-gray-300 rounded-lg px-3 py-2 text-sm">
+                       class="flex-1 min-w-64 border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-indigo-200" />
+                <select wire:model.live="perPage" class="border border-gray-300 rounded-lg px-3 py-2 text-sm shrink-0">
                     <option>15</option>
                     <option>30</option>
                     <option>50</option>
                 </select>
-                <span class="text-sm text-gray-500">{{ $submissions->total() }} total</span>
+                <span class="text-sm text-gray-500 shrink-0">{{ $submissions->total() }} total</span>
             </div>
 
             @if($submissions->isEmpty())
@@ -47,8 +47,8 @@
                                     <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Submitted</th>
                                     @foreach($form->fields as $field)
                                         @if($field['type'] !== 'heading')
-                                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                                                {{ Str::limit($field['label'], 20) }}
+                                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase max-w-xs truncate" title="{{ $field['label'] }}">
+                                                {{ $field['label'] }}
                                             </th>
                                         @endif
                                     @endforeach
@@ -63,7 +63,7 @@
                                         </td>
                                         @foreach($form->fields as $field)
                                             @if($field['type'] !== 'heading')
-                                                <td class="px-4 py-3 text-gray-700 max-w-xs truncate">
+                                                <td class="px-4 py-3 text-gray-700 max-w-xs overflow-hidden text-ellipsis whitespace-nowrap" title="{{ is_array($sub->data[$field['key']] ?? null) ? implode(', ', $sub->data[$field['key']]) : ($sub->data[$field['key']] ?? '') }}">
                                                     {{ is_array($sub->data[$field['key']] ?? null)
                                                         ? implode(', ', $sub->data[$field['key']])
                                                         : ($sub->data[$field['key']] ?? '—') }}

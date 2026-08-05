@@ -2,12 +2,12 @@
 
     {{-- Top Bar --}}
     <div class="bg-white border-b px-6 py-3 flex items-center gap-4 sticky top-0 z-40 shadow-sm">
-        <a href="{{ route('forms.index') }}" class="text-gray-400 hover:text-gray-600">← Back</a>
+        <a href="{{ route('forms.index') }}" class="text-gray-400 hover:text-gray-600 shrink-0">← Back</a>
 
         <input type="text" wire:model.blur="title" placeholder="Form title..."
-               class="flex-1 text-lg font-semibold border-0 focus:ring-0 bg-transparent px-2" />
+               class="flex-1 text-lg font-semibold border-0 focus:ring-0 bg-transparent px-2 min-w-0" />
 
-        <select wire:model="status" class="text-sm border border-gray-200 rounded-lg px-3 py-1.5">
+        <select wire:model="status" class="text-sm border border-gray-200 rounded-lg px-3 py-1.5 shrink-0">
             <option value="draft">Draft</option>
             <option value="published">Published</option>
             <option value="closed">Closed</option>
@@ -159,25 +159,25 @@
                                                     <span class="text-red-500 ml-1">*</span>
                                                 @endif
                                             </div>
-                                            <div class="text-xs text-gray-400 mt-0.5 flex items-center gap-2">
-                                                <span class="px-1.5 py-0.5 bg-gray-100 rounded text-gray-500 font-mono">{{ $field['type'] }}</span>
-                                                @if(!empty($field['placeholder'])) <span>{{ Str::limit($field['placeholder'], 30) }}</span> @endif
+                                            <div class="text-xs text-gray-400 mt-0.5 flex items-center gap-2 flex-wrap">
+                                                <span class="px-1.5 py-0.5 bg-gray-100 rounded text-gray-500 font-mono whitespace-nowrap shrink-0">{{ $field['type'] }}</span>
+                                                @if(!empty($field['placeholder'])) <span class="truncate">{{ $field['placeholder'] }}</span> @endif
                                             </div>
                                         @endif
                                     </div>
 
-                                    <div class="flex items-center gap-1 shrink-0">
+                                    <div class="flex items-center gap-0.5 shrink-0 ml-2">
                                         <button wire:click="selectField('{{ $field['id'] }}')"
-                                                class="p-1.5 rounded hover:bg-gray-100 text-gray-400 hover:text-indigo-600" title="Edit">
+                                                class="p-1.5 rounded hover:bg-gray-100 text-gray-400 hover:text-indigo-600 text-lg w-8 h-8 flex items-center justify-center" title="Edit">
                                             ✏️
                                         </button>
                                         <button wire:click="duplicateField('{{ $field['id'] }}')"
-                                                class="p-1.5 rounded hover:bg-gray-100 text-gray-400 hover:text-gray-600" title="Duplicate">
+                                                class="p-1.5 rounded hover:bg-gray-100 text-gray-400 hover:text-gray-600 text-lg w-8 h-8 flex items-center justify-center" title="Duplicate">
                                             📋
                                         </button>
                                         <button wire:click="removeField('{{ $field['id'] }}')"
                                                 wire:confirm="Remove this field?"
-                                                class="p-1.5 rounded hover:bg-red-50 text-gray-400 hover:text-red-500" title="Delete">
+                                                class="p-1.5 rounded hover:bg-red-50 text-gray-400 hover:text-red-500 text-lg w-8 h-8 flex items-center justify-center" title="Delete">
                                             🗑️
                                         </button>
                                     </div>
@@ -269,15 +269,15 @@
                                 <label class="block text-xs font-medium text-gray-600 mb-1">Options</label>
                                 <div class="space-y-1">
                                     @foreach($selectedField['options'] as $oi => $opt)
-                                        <div class="flex gap-1">
+                                        <div class="flex gap-1.5 items-center">
                                             <input type="text" value="{{ $opt['label'] }}"
                                                    wire:change="updateField('{{ $selectedField['id'] }}', 'options.{{ $oi }}.label', $event.target.value)"
-                                                   class="flex-1 border border-gray-200 rounded px-2 py-1 text-xs" placeholder="Label" />
+                                                   class="flex-1 border border-gray-200 rounded px-2 py-1 text-xs min-w-0" placeholder="Label" />
                                             <input type="text" value="{{ $opt['value'] }}"
                                                    wire:change="updateField('{{ $selectedField['id'] }}', 'options.{{ $oi }}.value', $event.target.value)"
-                                                   class="w-24 border border-gray-200 rounded px-2 py-1 text-xs font-mono" placeholder="value" />
+                                                   class="w-20 border border-gray-200 rounded px-2 py-1 text-xs font-mono" placeholder="value" />
                                             <button wire:click="removeOption('{{ $selectedField['id'] }}', {{ $oi }})"
-                                                    class="text-red-400 hover:text-red-600 px-1">✕</button>
+                                                    class="text-red-400 hover:text-red-600 px-1.5 py-1 rounded hover:bg-red-50 flex-shrink-0 w-6 h-6 flex items-center justify-center">✕</button>
                                         </div>
                                     @endforeach
                                 </div>
@@ -309,9 +309,9 @@
                             ['type' => 'heading',  'icon' => 'H',  'label' => 'Heading'],
                         ] as $ft)
                             <button wire:click="addField('{{ $ft['type'] }}')"
-                                    class="flex items-center gap-2 px-3 py-2 border border-gray-200 rounded-lg hover:border-indigo-300 hover:bg-indigo-50 text-left transition-colors">
-                                <span class="text-base w-5 text-center shrink-0 text-gray-500">{{ $ft['icon'] }}</span>
-                                <span class="text-xs font-medium text-gray-700">{{ $ft['label'] }}</span>
+                                    class="flex items-center gap-1.5 px-2 py-2 border border-gray-200 rounded-lg hover:border-indigo-300 hover:bg-indigo-50 text-left transition-colors min-w-0">
+                                <span class="text-base w-5 h-5 flex items-center justify-center shrink-0 text-gray-500">{{ $ft['icon'] }}</span>
+                                <span class="text-xs font-medium text-gray-700 truncate">{{ $ft['label'] }}</span>
                             </button>
                         @endforeach
                     </div>

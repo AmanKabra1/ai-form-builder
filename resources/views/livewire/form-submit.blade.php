@@ -58,24 +58,24 @@
                                     </select>
                                     @break
                                 @case('radio')
-                                    <div class="space-y-1 mt-1">
+                                    <div class="space-y-2 mt-1">
                                         @foreach($field['options'] ?? [] as $opt)
                                             <label class="flex items-center gap-2 cursor-pointer">
                                                 <input type="radio" wire:model="answers.{{ $key }}"
                                                        value="{{ $opt['value'] }}"
-                                                       class="text-indigo-600 border-gray-300" />
+                                                       class="text-indigo-600 border-gray-300 shrink-0" />
                                                 <span class="text-sm text-gray-700">{{ $opt['label'] }}</span>
                                             </label>
                                         @endforeach
                                     </div>
                                     @break
                                 @case('checkbox')
-                                    <div class="space-y-1 mt-1">
+                                    <div class="space-y-2 mt-1">
                                         @foreach($field['options'] ?? [] as $opt)
                                             <label class="flex items-center gap-2 cursor-pointer">
                                                 <input type="checkbox" wire:model="answers.{{ $key }}"
                                                        value="{{ $opt['value'] }}"
-                                                       class="rounded text-indigo-600 border-gray-300" />
+                                                       class="rounded text-indigo-600 border-gray-300 shrink-0" />
                                                 <span class="text-sm text-gray-700">{{ $opt['label'] }}</span>
                                             </label>
                                         @endforeach
