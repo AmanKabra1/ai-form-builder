@@ -7,7 +7,7 @@
         <input type="text" wire:model.blur="title" placeholder="Form title..."
                class="flex-1 text-lg font-semibold border-0 focus:ring-0 bg-transparent px-2 min-w-0" />
 
-        <select wire:model="status" class="text-sm border border-gray-200 rounded-lg px-3 py-1.5 shrink-0">
+        <select wire:model="status" class="text-sm border border-gray-200 rounded-lg px-3 py-1.5 shrink-0 pr-8 min-w-36">
             <option value="draft">Draft</option>
             <option value="published">Published</option>
             <option value="closed">Closed</option>
@@ -58,7 +58,7 @@
                               class="w-full text-sm border border-purple-200 rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-300 resize-none"></textarea>
                 </div>
                 <div class="flex flex-col gap-2">
-                    <select wire:model="aiMode" class="text-sm border border-purple-200 rounded-lg px-2 py-1.5">
+                    <select wire:model="aiMode" class="text-sm border border-purple-200 rounded-lg px-2 py-1.5 pr-8 min-w-32">
                         <option value="create">Create new</option>
                         <option value="edit">Edit existing</option>
                     </select>

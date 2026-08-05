@@ -21,7 +21,7 @@
             <div class="mb-4 flex gap-3 items-center flex-wrap">
                 <input type="text" wire:model.live.debounce.300ms="search" placeholder="Search responses..."
                        class="flex-1 min-w-64 border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-indigo-200" />
-                <select wire:model.live="perPage" class="border border-gray-300 rounded-lg px-3 py-2 text-sm shrink-0">
+                <select wire:model.live="perPage" class="border border-gray-300 rounded-lg px-3 py-2 text-sm shrink-0 pr-8 min-w-16">
                     <option>15</option>
                     <option>30</option>
                     <option>50</option>

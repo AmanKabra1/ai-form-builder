@@ -39,34 +39,11 @@ if (-not (Test-Path "$projectPath\database\database.sqlite")) {
     php artisan db:seed
 }
 
-Write-Host "[6/6] Starting services..." -ForegroundColor Yellow
+Write-Host "[6/6] Starting Laravel server..." -ForegroundColor Yellow
 Write-Host ""
 Write-Host "========================================" -ForegroundColor Green
 Write-Host "[DONE] Setup Complete!" -ForegroundColor Green
 Write-Host "========================================" -ForegroundColor Green
-Write-Host ""
-
-# Start three services in parallel
-$job1 = Start-Job -ScriptBlock {
-    Set-Location "C:\Users\Lenovo\Desktop\Personal\BackendProject\form-builder"
-    Write-Host "Starting Laravel server..." -ForegroundColor Cyan
-    php artisan serve
-}
-
-$job2 = Start-Job -ScriptBlock {
-    Set-Location "C:\Users\Lenovo\Desktop\Personal\BackendProject\form-builder"
-    Write-Host "Starting asset builder..." -ForegroundColor Cyan
-    npm run dev
-}
-
-$job3 = Start-Job -ScriptBlock {
-    Set-Location "C:\Users\Lenovo\Desktop\Personal\BackendProject\form-builder"
-    Write-Host "Starting queue worker..." -ForegroundColor Cyan
-    php artisan queue:work
-}
-
-Write-Host ""
-Write-Host "[OK] All services started!" -ForegroundColor Green
 Write-Host ""
 Write-Host "[INFO] Application URL: http://localhost:8000" -ForegroundColor Cyan
 Write-Host ""
@@ -74,8 +51,8 @@ Write-Host "[INFO] Login Credentials:" -ForegroundColor Cyan
 Write-Host "       Email: demo@example.com" -ForegroundColor White
 Write-Host "       Password: password" -ForegroundColor White
 Write-Host ""
-Write-Host "[NOTE] To stop all services, press Ctrl+C" -ForegroundColor Yellow
+Write-Host "[NOTE] To stop the server, press Ctrl+C" -ForegroundColor Yellow
 Write-Host ""
 
-# Keep running until user stops
-Wait-Job -Job $job1, $job2, $job3
+# Run Laravel server in foreground
+php artisan serve

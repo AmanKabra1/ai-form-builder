@@ -84,7 +84,7 @@
                                     </div>
                                 </div>
                                 <select wire:change="updateFieldType({{ $i }}, $event.target.value)"
-                                        class="border border-gray-200 rounded-lg px-2 py-1 text-sm shrink-0">
+                                        class="border border-gray-200 rounded-lg px-2 py-1 text-sm shrink-0 pr-8 min-w-32">
                                     @foreach(['text','textarea','number','email','phone','date','dropdown','radio','checkbox','file','heading','rating'] as $t)
                                         <option value="{{ $t }}" {{ $field['type'] === $t ? 'selected' : '' }}>{{ $t }}</option>
                                     @endforeach
